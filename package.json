@@ -1,7 +1,7 @@
 {
-  "name": "No-Numbers",
+  "name": "remove-line-breaks",
   "version": "1.0.0",
-  "description": "Make it just rectangle",
+  "description": "remove this <br>",
   "main": "code.js",
   "scripts": {
     "build": "tsc -p tsconfig.json"
@@ -9,6 +9,6 @@
   "author": "Nick Qurle",
   "license": "",
   "devDependencies": {
-    "@figma/plugin-typings": "^1.33.0"
+    "@figma/plugin-typings": "^1.51.0"
   }
 }
