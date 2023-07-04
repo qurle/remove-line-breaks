@@ -12,7 +12,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 const confirmMsgs = ["Done!", "You got it!", "Aye!", "Is that all?", "My job here is done.", "Gotcha!", "It wasn't hard.", "Got it! What's next?"];
 const renameMsgs = ["Cleaned", "Affected", "Made it with", "Fixed", "Glued"];
 const idleMsgs = ["No new lines, already", "I see no line breaks", "Any new lines? I can't see it", "Nothing to do, your layers are great"];
-const regex = /\r?\n|\r/g;
+const regex = /\r?\n|\r|[\u2028]/g;
 // Variables
 let notification;
 let selection;
@@ -37,7 +37,7 @@ function recursiveClean(node) {
             else
                 figma.loadFontAsync(node.fontName).then(() => {
                     console.log(node.characters);
-                    node.characters = node.characters.replace(regex, ' ');
+                    node.characters = node.characters.replaceAll(regex, ' ');
                     count++;
                     finish();
                 });

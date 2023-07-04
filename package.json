@@ -9,6 +9,6 @@
   "author": "Nick Qurle",
   "license": "",
   "devDependencies": {
-    "@figma/plugin-typings": "^1.51.0"
+    "@figma/plugin-typings": "^1.69.0"
   }
 }
