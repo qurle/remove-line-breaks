@@ -23,28 +23,34 @@ figma.on("currentpagechange", cancel);
 working = true;
 selection = figma.currentPage.selection;
 console.log(selection.length + " selected");
-if (selection.length)
-    for (const node of selection)
-        recursiveClean(node);
-else
-    recursiveClean(figma.currentPage);
+run(selection);
+function run(selection) {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (selection.length) {
+            for (const node of selection)
+                yield recursiveClean(node);
+            finish();
+        }
+        else {
+            yield recursiveClean(figma.currentPage);
+            finish();
+        }
+    });
+}
 function recursiveClean(node) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log('recursion with ' + node.toString());
         if (node.type === "TEXT") {
             if (node.hasMissingFont)
                 notify("You have layers with missing fonts");
-            else
-                figma.loadFontAsync(node.fontName).then(() => {
-                    console.log(node.characters);
-                    node.characters = node.characters.replace(regex, ' ');
-                    count++;
-                    finish();
-                });
+            else {
+                yield figma.loadFontAsync(node.fontName);
+                node.characters = node.characters.replace(regex, ' ');
+                count++;
+            }
         }
         else if ("children" in node) {
             for (const child of node.children) {
-                recursiveClean(child);
+                yield recursiveClean(child);
             }
         }
     });

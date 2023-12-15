@@ -18,30 +18,35 @@ figma.on("currentpagechange", cancel)
 working = true
 selection = figma.currentPage.selection
 console.log(selection.length + " selected")
+run(selection)
 
-if (selection.length)
-  for (const node of selection)
-    recursiveClean(node)
-else
-  recursiveClean(figma.currentPage)
+
+async function run(selection) {
+  if (selection.length) {
+    for (const node of selection)
+      await recursiveClean(node)
+    finish()
+
+  }
+  else {
+    await recursiveClean(figma.currentPage)
+    finish()
+  }
+}
 
 async function recursiveClean(node) {
-  console.log('recursion with ' + node.toString())
   if (node.type === "TEXT") {
     if (node.hasMissingFont)
       notify("You have layers with missing fonts")
-    else
-      figma.loadFontAsync(node.fontName).then(() => {
-        console.log(node.characters)
-        node.characters = node.characters.replace(regex, ' ')
-        count++
-
-        finish()
-      })
+    else {
+      await figma.loadFontAsync(node.fontName)
+      node.characters = node.characters.replace(regex, ' ')
+      count++
+    }
   }
   else if ("children" in node) {
     for (const child of node.children) {
-      recursiveClean(child)
+      await recursiveClean(child)
     }
   }
 }
