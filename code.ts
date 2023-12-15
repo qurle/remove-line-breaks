@@ -4,7 +4,7 @@
 const confirmMsgs = ["Done!", "You got it!", "Aye!", "Is that all?", "My job here is done.", "Gotcha!", "It wasn't hard.", "Got it! What's next?"]
 const renameMsgs = ["Cleaned", "Affected", "Made it with", "Fixed", "Glued"]
 const idleMsgs = ["No new lines, already", "I see no line breaks", "Any new lines? I can't see it", "Nothing to do, your layers are great"]
-const regex = /\r?\n|\r/g
+const regex = /\r?\n|\r|[\u2028]/g
 
 // Variables
 let notification: NotificationHandler
