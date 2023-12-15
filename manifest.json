@@ -3,6 +3,11 @@
   "id": "1169768513984029284",
   "api": "1.0.0",
   "main": "code.js",
+  "networkAccess": {
+    "allowedDomains": [
+      "none"
+    ]
+  },
   "relaunchButtons": [
     {
       "command": "relaunch",
@@ -11,6 +16,7 @@
     }
   ],
   "editorType": [
-    "figma"
+    "figma",
+    "figjam"
   ]
 }
