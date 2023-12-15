@@ -1,1 +1,8 @@
 code.js
+node_modules
+node_modules/
+.node_modules/
+package-lock.json
+/dist
+/build
+.vscode
